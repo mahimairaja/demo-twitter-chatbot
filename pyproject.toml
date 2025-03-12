@@ -1,0 +1,13 @@
+[project]
+name = "twitter-api-client-minimal"
+version = "0.1.0"
+description = "A minimal Twitter API client using FastAPI"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "fastapi==0.97.0",
+    "pydantic==1.10.9",
+    "python-dotenv==1.0.0",
+    "tweepy==4.14.0",
+    "uvicorn==0.22.0",
+]
