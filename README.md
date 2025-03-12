@@ -1,117 +1,112 @@
-# Twitter API Client (Minimal)
+# 🤖 Twitter Bot Assistant
 
-A simple Python FastAPI application for accessing basic Twitter/X API v2 information.
+> A smart Twitter bot built with FastAPI that automatically responds to mentions using AI. Simple, fast, and respects API limits.
 
-## Features
+[![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)](https://www.python.org/downloads/)
+[![FastAPI](https://img.shields.io/badge/FastAPI-0.97.0-009688.svg)](https://fastapi.tiangolo.com)
+[![Twitter API](https://img.shields.io/badge/Twitter_API-v2-1DA1F2.svg)](https://developer.twitter.com/en/docs/twitter-api)
+[![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 
-- **Account Information**: Get details about the authenticated Twitter account via the `/account/whoami` endpoint
-- **Usage Tracking**: Monitor your API usage against Twitter API v2 free tier limits via the `/system/usage` endpoint
-- **Tweet Posting**: Post tweets to your Twitter account via the `/tweet` endpoint
+## ✨ Features
 
-## Twitter API v2 Free Tier Limits
+- 🔄 **Auto-Reply**: Responds to mentions automatically
+- 🧠 **AI Integration**: Optional LLM-powered responses
+- 📊 **Usage Tracking**: Monitors Twitter API limits
+- 🚀 **Fast & Async**: Built with FastAPI
+- 🔑 **Simple Auth**: Easy Twitter API setup
 
-This application tracks and respects the Twitter API v2 free tier limits:
-- 500 posts per month (app level)
-- 500 posts per month (user level)
-- 100 reads per month
-
-The application will log warnings when you approach or exceed these limits.
-
-## Setup
+## 🚀 Quick Start
 
 ### Prerequisites
 
 - Python 3.8+
-- A Twitter Developer Account
-- Twitter API v2 credentials
+- Twitter Developer Account
+- Twitter API v2 Credentials
 
-### Environment Variables
+### Setup in 3 Steps
 
-Create a `.env` file in the root directory with the following variables:
-
-```
-# Twitter API Credentials
-TWITTER_API_KEY=your_api_key
-TWITTER_API_KEY_SECRET=your_api_key_secret
-TWITTER_ACCESS_TOKEN=your_access_token
-TWITTER_ACCESS_TOKEN_SECRET=your_access_token_secret
-TWITTER_BEARER_TOKEN=your_bearer_token
-```
-
-### Installation
-
-1. Clone this repository
-2. Install dependencies:
-   ```
+1. **Clone & Install**
+   ```bash
+   git clone <your-repo-url>
+   cd twitter-bot-assistant
    pip install -r requirements.txt
    ```
-3. Run the application:
+
+2. **Configure**
+   ```bash
+   # Create .env file with your Twitter credentials
+   cp .env.example .env
+   # Edit .env with your details
    ```
+
+3. **Run**
+   ```bash
    python main.py
    ```
-   
-The server will start on `http://localhost:8000`.
 
-## API Endpoints
+Visit `http://localhost:8000/docs` for the interactive API documentation.
 
-The API endpoints are organized into logical groups for better structure:
+## 🎮 Basic Usage
 
-### General Endpoints
-
-- `GET /`: Check if the application is running, returns information about available endpoint groups
-
-### Account Endpoints
-
-- `GET /account/whoami`: Get information about the authenticated Twitter account
-
-### Tweet Endpoints
-
-- `POST /tweet`: Post a new tweet to your Twitter account
-
-### System Endpoints
-
-- `GET /system/usage`: Get current API usage statistics against free tier limits
-
-### Usage Examples
-
-#### Posting a Tweet
-
+### Enable the Bot
 ```bash
-curl -X POST "http://localhost:8000/tweet" \
+curl -X POST "http://localhost:8000/bot/enable"
+```
+
+### Configure Auto-Replies
+```bash
+curl -X POST "http://localhost:8000/bot/configure" \
   -H "Content-Type: application/json" \
   -d '{
-    "text": "Hello world from my Twitter API Client!"
+    "check_interval_seconds": 120,
+    "response_prefix": "🤖",
+    "use_llm": false
   }'
 ```
 
-#### Getting Account Information
-
+### Post a Tweet
 ```bash
-curl -X GET "http://localhost:8000/account/whoami"
+curl -X POST "http://localhost:8000/tweet" \
+  -H "Content-Type: application/json" \
+  -d '{"text": "Hello from my Twitter Bot! 🚀"}'
 ```
 
-#### Checking API Usage
+## 🧠 AI Integration
 
-```bash
-curl -X GET "http://localhost:8000/system/usage"
-```
+Enable AI-powered responses by:
 
-## Setting Up Twitter API v2 Access
+1. Add your OpenAI key to `.env`:
+   ```
+   OPENAI_API_KEY=your_key_here
+   ```
 
-1. Go to the [Twitter Developer Portal](https://developer.twitter.com/en/portal/dashboard)
-2. Create a Project and an App within that project
-3. Apply for Basic (free tier) access
-4. Generate the API Key, API Key Secret, Access Token, and Access Token Secret
-5. **Important**: Ensure your app has "Read and Write" permissions enabled for the tweet endpoint to work
+2. Enable LLM responses:
+   ```bash
+   curl -X POST "http://localhost:8000/bot/configure-llm" \
+     -d '{"use_llm": true}'
+   ```
 
-## Troubleshooting
+## 📈 API Limits
 
-If you experience issues with authentication:
+Free tier limits are automatically tracked:
+- 500 posts/month (app)
+- 500 posts/month (user)
+- 100 reads/month
 
-1. Ensure your Twitter API credentials are correct in the .env file
-2. Verify that your Twitter Developer account is active and in good standing
-3. Check the application logs for detailed error messages
+## 🤝 Contributing
 
-## License
+Feel free to:
+- Open issues
+- Submit PRs
+- Suggest features
+- Share your experience
 
-MIT
+## 📝 License
+
+MIT © [Your Name]
+
+---
+
+<div align="center">
+Made with ❤️ by <a href="https://github.com/mahimairaja">Mahimai Raja</a>
+</div>
