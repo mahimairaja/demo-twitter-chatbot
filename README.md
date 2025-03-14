@@ -103,7 +103,7 @@ Feel free to:
 
 ## 📝 License
 
-MIT © [Your Name]
+MIT © Mahimai Raja
 
 ---
 
